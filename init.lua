@@ -810,7 +810,7 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -866,6 +866,10 @@ require('lazy').setup({
   {
     'ggandor/leap.nvim',
     dependencies = { 'tpope/vim-repeat' },
+    config = function()
+      -- It's suggested not to set up lazy loading keys as leap manages its own.
+      require('leap').create_default_mappings()
+    end,
   },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
