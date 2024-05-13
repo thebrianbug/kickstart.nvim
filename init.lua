@@ -810,7 +810,20 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      -- require('mini.surround').setup()
+      require('mini.surround').setup {
+        keymaps = {
+          insert = '<C-g>z',
+          insert_line = 'gC-ggZ',
+          normal = 'gz',
+          normal_cur = 'gZ',
+          normal_line = 'gzgz',
+          normal_cur_line = 'gZgZ',
+          visual = 'gz',
+          visual_line = 'gZ',
+          delete = 'gzd',
+          change = 'gzc',
+        },
+      }
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -867,7 +880,7 @@ require('lazy').setup({
     'ggandor/leap.nvim',
     dependencies = { 'tpope/vim-repeat' },
     config = function()
-      -- It's suggested not to set up lazy loading keys as leap manages its own.
+      -- It' suggested not to set up lazy loading keys as leap manages its own.
       require('leap').create_default_mappings()
     end,
   },
