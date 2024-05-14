@@ -1,10 +1,11 @@
 local set = vim.keymap.set
 
-set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+set('n', '<leader>q', '<cmd>q<CR>', { desc = '[Q]uit' })
+set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Disable hlsearch ' })
 set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+set('n', '<leader>l', vim.diagnostic.setloclist, { desc = 'Open diagnostic quickfix [L]ist' })
 
 set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
