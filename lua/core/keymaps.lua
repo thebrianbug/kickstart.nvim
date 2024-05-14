@@ -1,6 +1,7 @@
 local set = vim.keymap.set
 
 set('n', '<leader>q', '<cmd>q<CR>', { desc = '[Q]uit' })
+set('n', '<leader>w', '<cmd>w<CR>', { desc = '[W]rite' })
 set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Disable hlsearch ' })
 set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
