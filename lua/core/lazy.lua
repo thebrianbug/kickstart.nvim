@@ -42,6 +42,7 @@ require('lazy').setup {
       }, { mode = 'v' })
     end,
   },
+
   {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -57,6 +58,7 @@ require('lazy').setup {
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
+      { 'nvim-telescope/telescope-file-browser.nvim' },
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
@@ -65,11 +67,15 @@ require('lazy').setup {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          file_browser = {
+            hijack_netrw = true,
+          },
         },
       }
 
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'file_browser')
 
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
@@ -90,6 +96,8 @@ require('lazy').setup {
           previewer = false,
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
+
+      vim.keymap.set('n', '<leader>fb', ':Telescope file_browser<CR>')
 
       vim.keymap.set('n', '<leader>s/', function()
         builtin.live_grep {
