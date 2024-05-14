@@ -1,30 +1,5 @@
-local g = vim.g -- Global variables
-local opt = vim.opt -- Set options (global/buffer/windows-scoped)
-
-g.mapleader = ' '
-g.maplocalleader = ''
-g.have_nerd_font = true
-
-opt.number = true
-opt.mouse = 'a'
-opt.showmode = false
-opt.clipboard = 'unnamedplus'
-opt.breakindent = true
-opt.undofile = true
-opt.ignorecase = true
-opt.smartcase = true
-opt.signcolumn = 'yes'
-opt.updatetime = 250
-opt.timeoutlen = 300
-opt.splitright = true
-opt.splitbelow = true
-opt.list = true
-opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-opt.inccommand = 'split'
-opt.cursorline = true
-opt.scrolloff = 10
-opt.conceallevel = 2
-opt.hlsearch = true
+require 'core.globals'
+require 'core.opts'
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
