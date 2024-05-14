@@ -760,7 +760,7 @@ require('lazy').setup({
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    branch = 'v0.9.1',
+    tag = 'v0.9.1',
     opts = {
       ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
@@ -840,12 +840,6 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter',
       'marilari88/neotest-vitest',
       'thenbe/neotest-playwright',
-    },
-    opts = {
-      adapters = {
-        ['neotest-vitest'] = {},
-        ['neotest-playwright'] = {},
-      },
     },
   },
 
