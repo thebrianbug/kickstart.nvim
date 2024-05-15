@@ -35,6 +35,8 @@ require('lazy').setup {
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
         ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+        ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+        ['<leader>gh'] = { name = '[G]it[Hub]', _ = 'which_key_ignore' },
       }
 
       wk.register({
@@ -457,8 +459,8 @@ require('lazy').setup {
     config = function()
       require('octo').setup()
 
-      vim.keymap.set('n', '<leader>ghi', '<CMD>Octo issue list<CR>', { desc = '[G]it[H]ub [I]ssue List' })
-      vim.keymap.set('n', '<leader>ghp', '<CMD>Octo pr list<CR>', { desc = '[G]it[H]ub [P]r List' })
+      vim.keymap.set('n', '<leader>ghi', '<CMD>Octo issue list<CR>', { desc = '[G]it[H]ub [I]ssues' })
+      vim.keymap.set('n', '<leader>ghr', '<CMD>Octo pr list<CR>', { desc = '[G]it[H]ub [R]eview' })
 
       vim.keymap.set('i', '@', '@<C-x><C-o>', { silent = true, buffer = true, desc = 'Enable completion for GitHub usernames' })
       vim.keymap.set('i', '#', '#<C-x><C-o>', { silent = true, buffer = true, desc = 'Enable completion for GitHub issues' })
