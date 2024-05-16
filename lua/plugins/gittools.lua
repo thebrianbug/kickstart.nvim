@@ -15,27 +15,20 @@ return {
   { 'tpope/vim-fugitive' },
 
   {
-    'epwalsh/obsidian.nvim',
-    version = '*',
-    lazy = true,
-    ft = 'markdown',
-    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-    -- event = {
-    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-    --   "BufReadPre path/to/my-vault/**.md",
-    --   "BufNewFile path/to/my-vault/**.md",
-    -- },
-    dependencies = {
+    'pwntester/octo.nvim',
+    requires = {
       'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'nvim-tree/nvim-web-devicons',
     },
-    opts = {
-      workspaces = {
-        {
-          name = 'personal',
-          path = '~/source/personal-vault',
-        },
-      },
-    },
+    config = function()
+      require('octo').setup()
+
+      vim.keymap.set('n', '<leader>ghi', '<CMD>Octo issue list<CR>', { desc = '[G]it[H]ub [I]ssue List' })
+      vim.keymap.set('n', '<leader>ghp', '<CMD>Octo pr list<CR>', { desc = '[G]it[H]ub [P]r List' })
+
+      vim.keymap.set('i', '@', '@<C-x><C-o>', { silent = true, buffer = true, desc = 'Enable completion for GitHub usernames' })
+      vim.keymap.set('i', '#', '#<C-x><C-o>', { silent = true, buffer = true, desc = 'Enable completion for GitHub issues' })
+    end,
   },
 }

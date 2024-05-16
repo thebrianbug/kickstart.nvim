@@ -387,6 +387,7 @@ require('lazy').setup {
   require 'plugins.colorscheme',
   require 'plugins.leap',
   require 'plugins.gittools',
+  require 'plugins.dbee',
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
