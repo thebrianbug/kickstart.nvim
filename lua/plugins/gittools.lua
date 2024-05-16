@@ -22,7 +22,11 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require('octo').setup()
+      require('octo').setup {
+        suppress_missing_scope = {
+          projects_v2 = true,
+        },
+      }
 
       vim.keymap.set('n', '<leader>ghi', '<CMD>Octo issue list<CR>', { desc = '[G]it[H]ub [I]ssue List' })
       vim.keymap.set('n', '<leader>ghp', '<CMD>Octo pr list<CR>', { desc = '[G]it[H]ub [P]r List' })
