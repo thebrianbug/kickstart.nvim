@@ -8,18 +8,6 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   { 'numToStr/Comment.nvim', opts = {} },
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
   {
     'folke/which-key.nvim',
     event = 'VimEnter',
@@ -109,21 +97,6 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
-    end,
-  },
-
-  {
-    'stevearc/oil.nvim',
-    -- Optional dependencies
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      require('oil').setup {}
-
-      -- Open parent directory in current window
-      vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
-
-      -- Open parent directory in floating window
-      vim.keymap.set('n', '<space>-', require('oil').toggle_float)
     end,
   },
 
@@ -364,25 +337,6 @@ require('lazy').setup {
     end,
   },
 
-  {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1000,
-    config = function()
-      require('catppuccin').setup {
-        leap = true,
-        mason = true,
-        which_key = true,
-        octo = true,
-      }
-
-      -- setup must be called before loading
-      vim.cmd.colorscheme 'catppuccin'
-
-      -- vim.cmd.hi 'Comment gui=none'
-    end,
-  },
-
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
   {
@@ -420,114 +374,20 @@ require('lazy').setup {
       require('nvim-treesitter.configs').setup(opts)
     end,
   },
-  {
-    'ggandor/leap.nvim',
-    dependencies = { 'tpope/vim-repeat' },
-    config = function()
-      -- It' suggested not to set up lazy loading keys as leap manages its own.
-      require('leap').create_default_mappings()
-    end,
-  },
+
   {
     'kylechui/nvim-surround',
     version = '*',
     event = 'VeryLazy',
   },
-  { 'tpope/vim-fugitive' },
-  {
-    'epwalsh/obsidian.nvim',
-    version = '*',
-    lazy = true,
-    ft = 'markdown',
-    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-    -- event = {
-    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-    --   "BufReadPre path/to/my-vault/**.md",
-    --   "BufNewFile path/to/my-vault/**.md",
-    -- },
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-    opts = {
-      workspaces = {
-        {
-          name = 'personal',
-          path = '~/source/personal-vault',
-        },
-      },
-    },
-  },
 
-  {
-    'pwntester/octo.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-      'nvim-tree/nvim-web-devicons',
-    },
-    config = function()
-      require('octo').setup()
-
-      vim.keymap.set('n', '<leader>ghi', '<CMD>Octo issue list<CR>', { desc = '[G]it[H]ub [I]ssues' })
-      vim.keymap.set('n', '<leader>ghr', '<CMD>Octo pr list<CR>', { desc = '[G]it[H]ub [R]eview' })
-
-      vim.keymap.set('i', '@', '@<C-x><C-o>', { silent = true, buffer = true, desc = 'Enable completion for GitHub usernames' })
-      vim.keymap.set('i', '#', '#<C-x><C-o>', { silent = true, buffer = true, desc = 'Enable completion for GitHub issues' })
-    end,
-  },
-
-  {
-    'ThePrimeagen/harpoon',
-    branch = 'harpoon2',
-    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
-    config = function()
-      local harpoon = require 'harpoon'
-      harpoon:setup {}
-
-      -- basic telescope configuration
-      local conf = require('telescope.config').values
-      local function toggle_telescope(harpoon_files)
-        local file_paths = {}
-        for _, item in ipairs(harpoon_files.items) do
-          table.insert(file_paths, item.value)
-        end
-
-        require('telescope.pickers')
-          .new({}, {
-            prompt_title = 'Harpoon',
-            finder = require('telescope.finders').new_table {
-              results = file_paths,
-            },
-            previewer = conf.file_previewer {},
-            sorter = conf.generic_sorter {},
-          })
-          :find()
-      end
-
-      vim.keymap.set('n', '<C-e>', function()
-        toggle_telescope(harpoon:list())
-      end, { desc = 'Open harpoon window' })
-
-      vim.keymap.set('n', '<leader>a', function()
-        harpoon:list():add()
-      end, { desc = 'Harpoon [A]dd' })
-    end,
-  },
-
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    This is the easiest way to modularize your config.
-  --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  require 'plugins.oil',
+  require 'plugins.obsidian',
+  require 'plugins.harpoon',
+  require 'plugins.colorscheme',
+  require 'plugins.octo',
+  require 'plugins.leap',
+  require 'plugins.gittools',
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
