@@ -385,7 +385,6 @@ require('lazy').setup {
   require 'plugins.obsidian',
   require 'plugins.harpoon',
   require 'plugins.colorscheme',
-  require 'plugins.octo',
   require 'plugins.leap',
   require 'plugins.gittools',
 }
