@@ -122,6 +122,7 @@ return {
 
   { -- Autoformat
     'stevearc/conform.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
     lazy = false,
     keys = {
       {
@@ -146,21 +147,21 @@ return {
         }
       end,
       formatters_by_ft = {
-        javascriptreact = { 'prettier' },
-        typescriptreact = { 'prettier' },
-        svelte = { 'prettier' },
-        html = { 'prettier' },
-        yaml = { 'prettier' },
-        markdown = { 'prettier' },
-        graphql = { 'prettier' },
+        javascriptreact = { 'prettierd', 'prettier' },
+        typescriptreact = { 'prettierd', 'prettier' },
+        svelte = { 'prettierd', 'prettier' },
+        html = { 'prettierd', 'prettier' },
+        yaml = { 'prettierd', 'prettier' },
+        markdown = { 'prettierd', 'prettier' },
+        graphql = { 'prettierd', 'prettier' },
         lua = { 'stylua' },
         python = { 'isort', 'black' },
-        javascript = { { 'prettier' } },
-        typescript = { { 'prettier' } },
-        json = { { 'prettier' } },
-        css = { { 'prettier' } },
-        toml = { { 'prettier' } },
-        sql = { { 'prettier' } },
+        javascript = { { 'prettierd', 'prettier' } },
+        typescript = { { 'prettierd', 'prettier' } },
+        json = { { 'prettierd', 'prettier' } },
+        css = { { 'prettierd', 'prettier' } },
+        toml = { { 'prettierd', 'prettier' } },
+        sql = { { 'prettierd', 'prettier' } },
       },
     },
   },
